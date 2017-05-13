@@ -3,8 +3,9 @@ Rails.application.routes.draw do
   get 'sessions/new'
 
   get 'users/new'
-  
-  resources :users, only: [:new, :create]
+  get 'users/cow', :as=> :cow_user
+  get 'users/update', :as=> :update_user
+  resources :users, only: [:new, :create, :edit, :udpate]
   resources :sessions, only: [:new, :create, :destroy]
 
   resources 'contents' do

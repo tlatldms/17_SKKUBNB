@@ -8,8 +8,11 @@
 </head>
 <body>
    <% if current_user %>
-    <%=current_user.email %> 님 환영합니다! |
+    <%=current_user.realname%>(<%=current_user.email %>) 님 환영합니다! |
     <%= link_to '로그아웃하기', session_path(current_user.id), method: :delete %>
+    <%= link_to '어드민권한', edit_user_path(current_user.id) %>
+    <%= link_to '모더권한', update_user_path(current_user.id) %>
+    <%= link_to '소시민으로 돌아가기', cow_user_path(current_user.id) %>
     <% else %>
     <!--#로그아웃, 로그인이 안됐을때 -->
     <%= link_to '회원가입하기', new_user_path %>

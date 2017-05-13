@@ -3,7 +3,8 @@ class SessionsController < ApplicationController
   end
   
   def create
-    user=User.find_by(email: params[:email])
+    user=(User.find_by(email: params[:email]) || User.find_by(stringid: params[:stringid]))
+    
     if user && user.authenticate(params[:password])
       #로그인 성공
       session[:user_id]=user.id
@@ -13,6 +14,8 @@ class SessionsController < ApplicationController
       flash[:alert]='아이디나 비밀번호가 틀렸습니다.'
       render 'new'
     end
+    
+    
   end
     
     def destroy
