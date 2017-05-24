@@ -1,5 +1,5 @@
 class User < ActiveRecord::Base
-before_create :confirmation_token  
+# before_create :confirmation_token  
   
   rolify
     has_secure_password
@@ -7,6 +7,7 @@ before_create :confirmation_token
     has_many :content2s
     has_many :comments
     has_many :comment2s
+    has_many :rate2s
     
     
     validates :email, uniqueness: true, allow_blank: false
@@ -30,6 +31,6 @@ before_create :confirmation_token
         self.confirm_token = nil
         save!(:validate => false)
      end
-    #이메일 인ㄴ증
+    #이메일 인증
 =end    
 end

@@ -1,11 +1,13 @@
-<h1>회원가입</h1>
+<div class=wholebox>
+    <h3>회원가입</h3><br>
 <%= flash[:alert] %>
 모든 항목을 입력하십시오.
 <%= form_for @user do |f| %>
-    Email:<%= f.email_field :email, placeholder:"email" %><br>
-    ID :<%= f.text_field :stringid, placeholder:"ID"  %><br>
-    Your name:<%= f.text_field :realname, placeholder:"이름"  %><br>
-    Password: <%= f.password_field :password, placeholder:"비밀번호"  %><br>
-    Password Confirmation : <%= f.password_field :password_confirmation, placeholder:"비밀번호 확인"  %><br>
+    <%= f.email_field :email, placeholder:"email" %><br>
+    <%= f.text_field :stringid, placeholder:"ID", size:25  %>
+    <%= f.text_field :realname, placeholder:"이름", size:25  %><br>
+    <%= f.password_field :password, placeholder:"비밀번호", size:25  %>
+    <%= f.password_field :password_confirmation, placeholder:"비밀번호 확인", size:25  %><br>
     <%= f.submit '회원가입하기' %>
 <% end %>
+</div>

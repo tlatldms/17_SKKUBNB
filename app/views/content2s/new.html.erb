@@ -1,4 +1,5 @@
-자유게시판
+<div class=wholebox>
+    자유게시판
 <br><br><br><br><%= form_for @content do |f| %>
     <%= f.hidden_field :user_id, value: current_user.id %>
     <%= f.label :title, '제목' %>
@@ -8,3 +9,4 @@
     <%= f.submit %>
 <%end%>
 <%=link_to '홈으로', content2s_path%>
+</div>

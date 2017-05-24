@@ -1,10 +1,12 @@
-class RatesController < ApplicationController
+class Rate2sController < ApplicationController
+  before_action :authorize, only: [:new, :edit, :update, :destroy]
+  load_and_authorize_resource
   
   def create
     @content = Content.find(params[:content_id])
-    @rate = @content.rates.new(rate_params)
-    @rate.user = current_user
-    @rate.save
+    @rate2 = @content.rate2s.new(rate2_params)
+    @rate2.user = current_user
+    @rate2.save
     
     redirect_to :back
     
@@ -26,8 +28,8 @@ class RatesController < ApplicationController
 
   def destroy
     @content = Content.find(params[:content_id])
-    @rate = Rate.find(params[:id])
-    @rate.destroy 
+    @rate2 = Rate2.find(params[:id])
+    @rate2.destroy 
     
     redirect_to :back 
     
@@ -37,7 +39,7 @@ class RatesController < ApplicationController
   
   private
   
-  def rate_params
-    params.require(:rate).permit(:body, :title)
+  def rate2_params
+    params.require(:rate2).permit(:body, :title)
   end    
 end

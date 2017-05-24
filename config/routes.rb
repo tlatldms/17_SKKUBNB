@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
-  get 'contents/rates/:id', to:'contents#rate', :as=> :rate
+  
+  get 'contents/rate2s/:id', to:'contents#rate2', :as=> :rate2
   get 'contents/home', :as=> :home
   resources 'content2s' do
     resources 'comment2s'
@@ -15,7 +16,7 @@ Rails.application.routes.draw do
   end
   
     resources 'contents' do
-    resources 'rates'
+    resources 'rate2s'
   end
   
   

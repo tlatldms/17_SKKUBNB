@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170523075821) do
+ActiveRecord::Schema.define(version: 20170524192110) do
 
   create_table "comment2s", force: :cascade do |t|
     t.text     "body"
@@ -46,7 +46,7 @@ ActiveRecord::Schema.define(version: 20170523075821) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "rates", force: :cascade do |t|
+  create_table "rate2s", force: :cascade do |t|
     t.string   "body"
     t.string   "title"
     t.integer  "content_id"
@@ -79,10 +79,8 @@ ActiveRecord::Schema.define(version: 20170523075821) do
     t.string   "stringid"
     t.string   "realname"
     t.string   "name"
-    t.datetime "created_at",                            null: false
-    t.datetime "updated_at",                            null: false
-    t.boolean  "email_confirmed",       default: false
-    t.string   "confirm_token"
+    t.datetime "created_at",            null: false
+    t.datetime "updated_at",            null: false
   end
 
   create_table "users_roles", id: false, force: :cascade do |t|

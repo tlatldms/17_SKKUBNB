@@ -1,4 +1,5 @@
-<br><br><br><br>
+<div class=wholebox>
+    <br>
 <%= form_for @content, html: { multipart: true } do |f| %>
     <%= f.hidden_field :user_id, value: current_user.id %>
     <%= f.label :title, '제목' %>
@@ -14,4 +15,4 @@
 <br>
 <%=link_to '홈으로', contents_path%>
 
-
+</div>

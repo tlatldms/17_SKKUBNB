@@ -1,12 +1,15 @@
-<h1>로그인하기</h1>
+<div class=wholebox>
+   <h3>로그인하기</h3><br>
 <%= flash[:alert] %>
 
 <%= form_tag sessions_path do %>
     
     ID나 Email을 입력하세요.<br>
     
-    ID or Email: <%= text_field_tag :emailorid%><br>
-    Password: <%= text_field_tag :password%><br>
-    <%= submit_tag '로그인하기' %><br>
+    <%= text_field_tag :emailorid, nil, :placeholder=>"ID or Email", size:40 %><br>
+    <%= text_field_tag :password, nil, :placeholder=>"Password", size:40 %><br>
+    <%= submit_tag '로그인하기' %><br><br>
     <%=link_to '홈으로', contents_path %>
 <% end %>
+
+</div>

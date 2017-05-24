@@ -1,4 +1,5 @@
-<br><h2>
+<div class=wholebox>
+    <br><h2>
     제목:<%= @content.title %>
 </h2>
 <p>
@@ -11,35 +12,40 @@
 <!--<img src="</%= @content.image.url %>">-->
 <!--이미지 불러오기 (여진)-->
 
-<br>
----------------댓글----------------<br>
-
+    <br>
+<댓글목록><br>
+<div>
 <% @content.comments.each do |comment| %>
-    <%= comment.user.realname %>(<%= comment.user.stringid %>)님:
-    <%= comment.body %>
+    <% if @current_user == @content.user or @current_user == comment.user %>
+        <%= comment.user.realname %>(<%= comment.user.stringid %>)님:
+        <%= comment.body %>
     
     <!--< % if can? :update, comment %>-->
     <!--< %= link_to '글 수정하기', edit_content_comment_path(@content, @comment) %>-->
     <!--< %end%>-->
-    
-    <% if can? :destroy, comment %>
-    <%= link_to '삭제하기', [comment.content, comment], method: :delete, 
-        data:{confirm:'정말 삭제하시겠습니까?'} %><br>
-    <%end%>
-    
+            
+            <% if can? :destroy, comment %>
+            <%= link_to '삭제하기', [comment.content, comment], method: :delete, 
+                data:{confirm:'정말 삭제하시겠습니까?'} %>
+            <%end%>
+            <br>
+    <% else %>
+        - 글 주인과 문의자만 볼 수 있는 댓글입니다.<br>
+    <% end %>
 <% end %>
-
+</div>
+<br>
+<% if @current_user!=nil %>
 <%= form_for [@content, Comment.new] do |f|%>
     <%= f.text_area :body %>
-    <%= f.submit %>
+    <%= f.submit '댓글 등록'%>
+<%end%>
 <%end%>
 
-
-
     
-    <br><br>
+    <br>
 
-
-
- <%= link_to '후기 보기', rate_path %>
+ <%= link_to '후기 보기', rate2_path %>
  <%= link_to '목록으로', contents_path %>
+ 
+ </div>
