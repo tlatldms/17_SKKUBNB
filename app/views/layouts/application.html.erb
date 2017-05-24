@@ -1,23 +1,55 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Workspace</title>
+  <title>성대한 자취</title>
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
+  
+  
+<link rel="stylesheet" href="//cdn.jsdelivr.net/font-iropke-batang/1.2/font-iropke-batang.css">
+
+<!-- 합쳐지고 최소화된 최신 CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+
+<!-- 부가적인 테마 -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
+
+<!-- 합쳐지고 최소화된 최신 자바스크립트 -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+  
+  
 </head>
 <body>
+  
+  <h1 id="mainname">이름 정해야돼요!!</h1>
+
    <% if current_user %>
-    <%=current_user.realname%>(<%=current_user.email %>) 님 환영합니다! |
-    <%= link_to '로그아웃하기', session_path(current_user.id), method: :delete %>
-    <%= link_to '어드민권한', edit_user_path(current_user.id) %>
-    <%= link_to '모더권한', update_user_path(current_user.id) %>
-    <%= link_to '소시민으로 돌아가기', cow_user_path(current_user.id) %>
+    <ul>
+      <li><%= link_to '홈', home_path %> </li>
+      
+      <li><%=current_user.realname%>(<%=current_user.email %>) 님 환영합니다! </li>
+      <li style="float:right"><%= link_to '로그아웃하기', session_path(current_user.id), method: :delete %></li>
+      <li style="float:right"><%= link_to '자유게시판', content2s_path %></li>
+      <li style="float:right"><%= link_to '게시판1', contents_path %> </li>
+  <li><%= link_to '어드민권한', edit_user_path(current_user.id) %></li>
+      
+    </ul>
+
+
+
+   
+    <!--<#%= link_to '모더권한', update_user_path(current_user.id) %>-->
+    <!--<#%= link_to '소시민으로 돌아가기', cow_user_path(current_user.id) %>-->
     <% else %>
     <!--#로그아웃, 로그인이 안됐을때 -->
-    <%= link_to '회원가입하기', new_user_path %>
-    <%= link_to '로그인하기', new_session_path %>
-
+    <ul>
+      <li><%= link_to '홈', home_path %> </li>
+      <li style="float:right"><%= link_to '자유게시판', content2s_path %></li>
+      <li style="float:right"><%= link_to '게시판1', contents_path %> </li>
+      <li style="float:right"><%= link_to '회원가입하기', new_user_path %></li>
+      <li style="float:right">    <%= link_to '로그인하기', new_session_path %></li>
+    </ul>
 <br>
 
   <% end %>

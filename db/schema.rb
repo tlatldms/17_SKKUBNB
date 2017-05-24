@@ -11,11 +11,28 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170513123745) do
+ActiveRecord::Schema.define(version: 20170523075821) do
+
+  create_table "comment2s", force: :cascade do |t|
+    t.text     "body"
+    t.integer  "content2_id"
+    t.integer  "user_id"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
 
   create_table "comments", force: :cascade do |t|
     t.text     "body"
     t.integer  "content_id"
+    t.integer  "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "content2s", force: :cascade do |t|
+    t.string   "title"
+    t.text     "body"
+    t.integer  "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -23,6 +40,16 @@ ActiveRecord::Schema.define(version: 20170513123745) do
   create_table "contents", force: :cascade do |t|
     t.string   "title"
     t.text     "body"
+    t.integer  "user_id"
+    t.string   "image"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "rates", force: :cascade do |t|
+    t.string   "body"
+    t.string   "title"
+    t.integer  "content_id"
     t.integer  "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -51,8 +78,11 @@ ActiveRecord::Schema.define(version: 20170513123745) do
     t.string   "password_digest"
     t.string   "stringid"
     t.string   "realname"
-    t.datetime "created_at",            null: false
-    t.datetime "updated_at",            null: false
+    t.string   "name"
+    t.datetime "created_at",                            null: false
+    t.datetime "updated_at",                            null: false
+    t.boolean  "email_confirmed",       default: false
+    t.string   "confirm_token"
   end
 
   create_table "users_roles", id: false, force: :cascade do |t|

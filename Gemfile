@@ -1,4 +1,10 @@
 source 'https://rubygems.org'
+gem 'carrierwave', '~> 0.10.0'
+#사진 업로드 기능이 있는 잼입니다(여진) 
+#https://hcn1519.github.io/articles/2016-02/carrierwave 한글버전설명
+gem 'mini_magick', '~> 4.3'
+gem 'fog-aws'
+#클라우드에 파일저장 (여진)
 
 gem 'cancancan'
 gem 'rolify'

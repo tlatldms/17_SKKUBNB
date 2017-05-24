@@ -7,7 +7,8 @@ class CreateUsers < ActiveRecord::Migration
       t.string :password_digest
       t.string :stringid
       t.string :realname
-
+      t.string :name #이것도 추가할게윤하얌
+      
       t.timestamps null: false
     end
   end

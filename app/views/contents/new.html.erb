@@ -1,11 +1,17 @@
-<br><br><br><br><%= form_for @content do |f| %>
+<br><br><br><br>
+<%= form_for @content, html: { multipart: true } do |f| %>
     <%= f.hidden_field :user_id, value: current_user.id %>
     <%= f.label :title, '제목' %>
     <%= f.text_field :title %><br><br>
     <%= f.label :body, '내용' %>
-    <%= f.text_area :body %><br>
-    <%= f.submit %>
+    <%= f.text_area :body %><br><br>
+    
+    <%= f.file_field :image %>
+    <!--이미지업로드-->
+    <br><br>
+    <%= f.submit '등록하기' %>
 <%end%>
+<br>
 <%=link_to '홈으로', contents_path%>
 
 

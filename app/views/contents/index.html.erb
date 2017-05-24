@@ -1,9 +1,10 @@
-<br><br><br><%= link_to '새 글 쓰기', new_content_path %><br><br>
+<br><%= link_to '새 글 쓰기', new_content_path %><br><br>
 
 
 <% @contents.each do |content| %>
     제목:<a href='<%= content_path(content)%>'><%= content.title %></a><br>
-    글쓴이:<%= content.user.stringid %>(<%= content.user.email %>)<br>
+    글쓴이:<%= content.user.realname %>(<%= content.user.stringid %>)<br>
+    <%= %>
     <!-- #부모는 단수로 불러오고 자식은 복수로불러옴-->
     
     <% if can? :update, content %>

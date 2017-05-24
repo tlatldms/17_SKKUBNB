@@ -45,6 +45,10 @@ class ContentsController < ApplicationController
     # redirect_to contents_path #'/contents' 상대경로
   end
   
+  def rate
+    @rate = Content.find(params[:id])
+    @rate = Content.new
+  end
   
   private
   
@@ -54,7 +58,8 @@ class ContentsController < ApplicationController
   
   
   def content_params
-    params.require(:content).permit(:title, :body, :user_id)
+    params.require(:content).permit(:title, :body, :user_id, :image)
+    # :image 추가 >> 사진 저장
   end
   
   

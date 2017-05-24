@@ -16,7 +16,7 @@ class Ability
         can :new, :all
         can :create, :all
         can :destroy, :all
-        can :manage, Content, user_id: user.id
+        can :manage, :all, user_id: user.id #(all 자리에 Content)
        
       
       else 
@@ -24,16 +24,16 @@ class Ability
         can :read, :all #(show, index)
         can :new, :all
         can :create, :all
-        can :manage, Content, user_id: user.id
+        can :manage, :all, user_id: user.id
       end
       
-      if user.has_role? :cow
-        # 소시민 권한
-        can :read, :all #(show, index)
-        can :new, :all
-        can :create, :all
-        can :manage, Content, user_id: user.id
-      end
+      # if user.has_role? :cow
+      #   # 소시민 권한
+      #   can :read, :all #(show, index)
+      #   can :new, :all
+      #   can :create, :all
+      #   can :manage, Content, user_id: user.id
+      # end
       
     
 

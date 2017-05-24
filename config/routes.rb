@@ -1,7 +1,9 @@
 Rails.application.routes.draw do
-
-  get 'sessions/new'
-
+  get 'contents/rates/:id', to:'contents#rate', :as=> :rate
+  get 'contents/home', :as=> :home
+  resources 'content2s' do
+    resources 'comment2s'
+  end
   get 'users/new'
   get 'users/cow', :as=> :cow_user
   get 'users/update', :as=> :update_user
@@ -11,7 +13,22 @@ Rails.application.routes.draw do
   resources 'contents' do
     resources 'comments'
   end
-  root 'contents#index'
+  
+    resources 'contents' do
+    resources 'rates'
+  end
+  
+  
+  root 'contents#home'
+
+
+  resources :users do
+    member do
+      get :confirm_email
+    end
+  end
+  #이메일인증
+
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

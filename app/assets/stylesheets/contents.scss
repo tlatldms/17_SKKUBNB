@@ -1,3 +1,10 @@
 // Place all the styles related to the contents controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+@import url('//cdn.jsdelivr.net/font-iropke-batang/1.1/font-iropke-batang.css');
+body {
+    font-family: 'Iropke Batang', serif;
+    font-weight:700;
+    background-color:black;
+    color:#1E0000;
+}

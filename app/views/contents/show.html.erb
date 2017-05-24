@@ -2,11 +2,31 @@
     제목:<%= @content.title %>
 </h2>
 <p>
-    내용:<%= simple_format(@content.body) %>
+    <%= simple_format(@content.body) %>
 </p>
 
+
+ <%= image_tag("#{@content.image}") %>
+ 
+<!--<img src="</%= @content.image.url %>">-->
+<!--이미지 불러오기 (여진)-->
+
+<br>
+---------------댓글----------------<br>
+
 <% @content.comments.each do |comment| %>
-    <p><%= comment.body %></p>
+    <%= comment.user.realname %>(<%= comment.user.stringid %>)님:
+    <%= comment.body %>
+    
+    <!--< % if can? :update, comment %>-->
+    <!--< %= link_to '글 수정하기', edit_content_comment_path(@content, @comment) %>-->
+    <!--< %end%>-->
+    
+    <% if can? :destroy, comment %>
+    <%= link_to '삭제하기', [comment.content, comment], method: :delete, 
+        data:{confirm:'정말 삭제하시겠습니까?'} %><br>
+    <%end%>
+    
 <% end %>
 
 <%= form_for [@content, Comment.new] do |f|%>
@@ -14,4 +34,12 @@
     <%= f.submit %>
 <%end%>
 
- <%= link_to '홈으로', contents_path %>
+
+
+    
+    <br><br>
+
+
+
+ <%= link_to '후기 보기', rate_path %>
+ <%= link_to '목록으로', contents_path %>
