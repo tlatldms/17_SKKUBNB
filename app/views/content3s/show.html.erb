@@ -1,0 +1,43 @@
+<div class=wholebox>
+<h2>
+    제목:<%= @content.title %>
+</h2>
+<p>
+    <%= simple_format(@content.body) %>
+</p>
+
+<br>
+
+<댓글 목록><br>
+
+
+<% @content.comment3s.each do |comment| %>
+    <% if @current_user == comment.user or @current_user == @content.user %>
+    <%= comment.user.realname %>(<%= comment.user.stringid %>)님:
+    <%= comment.body %>
+    
+        <!--</% if can? :update, comment %>-->
+        <!--</%= link_to '글 수정하기', edit_content_comment_path(@content, @comment) %>-->
+        <!--</%end%>-->
+        
+            <% if can? :destroy, comment %>
+            <%= link_to '삭제하기', [comment.content3, comment], method: :delete, 
+                data:{confirm:'정말 삭제하시겠습니까?'} %>
+            <% end %>
+   
+    <br>
+    <% else %>
+    비밀 댓글입니다. <br>
+     <% end %>
+<% end %>
+
+<% if @current_user!=nil %>
+<%= form_for [@content, Comment3.new] do |f|%>
+    <%= f.text_area :body %>
+    <%= f.submit '문의 등록'%>
+<%end%>
+<% end %>
+
+
+ <%= link_to '목록으로', content3s_path %>
+ </div>

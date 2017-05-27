@@ -1,0 +1,11 @@
+<div class=wholebox>
+<%= form_for @content do |f| %>
+    <%= f.hidden_field :user_id, value: current_user.id %>
+    <%= f.label :title, '제목' %>
+    <%= f.text_field :title %><br><br>
+    <%= f.label :body, '내용' %>
+    <%= f.text_area :body %><br>
+    <%= f.submit '등록하기'%>
+<%end%>
+<%=link_to '목록으로', content3s_path%>
+</div>

@@ -5,11 +5,13 @@ gem 'carrierwave', '~> 0.10.0'
 gem 'mini_magick', '~> 4.3'
 gem 'fog-aws'
 #클라우드에 파일저장 (여진)
-
+gem 'fog', require: 'fog/aws'
 gem 'cancancan'
 gem 'rolify'
-gem 'letsrate'
-#별모양 평점(시은)
+
+gem 'mailgun-ruby'
+#메일 보임
+
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.5'
 # Use sqlite3 as the database for Active Record

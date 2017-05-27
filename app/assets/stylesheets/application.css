@@ -13,7 +13,7 @@ ul {
     margin: 0;
     padding: 0;
     overflow: hidden;
-    background-color: #00005D;
+    background-color: #FC437E;
 }
 
 li {
@@ -24,11 +24,18 @@ li {
     padding: 14px 16px;
     text-decoration: none;
 }
+/*li:hover{*/
+/*    color:#FC437E !important;*/
+/*    background-color:white;*/
+/*}*/
 
 /* visited link */
-
+li>a{
+    text-decoration:none;
+}
 li a:link {
     color: white;
+    text-decoration:none;
 }
 li a:visited {
     color: white;
@@ -36,13 +43,22 @@ li a:visited {
 
 /* mouse over link */
 li a:hover {
-    color: hotpink;
+    font-weight:bold;
 }
 .wholebox {
     margin:30px 30px auto;
+    display: inline-block;
 }
 
 
 #user_email {
     width: 435px;
+}
+
+.r_image {
+    width:400px;
+}
+
+.mini_rimage {
+    width:150px;
 }

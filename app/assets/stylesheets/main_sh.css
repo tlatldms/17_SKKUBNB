@@ -1,0 +1,7 @@
+.scene{
+    background-image: url(/assets/home.jpg);
+    background-repeat:no-repeat;
+    width:80%;
+    height:60vh;
+    margin:auto;
+}

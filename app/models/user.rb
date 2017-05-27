@@ -12,6 +12,21 @@ class User < ActiveRecord::Base
     
     validates :email, uniqueness: true, allow_blank: false
     validates :stringid, uniqueness: true, allow_blank: false
+    
+    
+    
+    def email_activate
+	self.email_confirmed = true
+	self.confirm_token = nil
+	save!(:validate => false)
+end
+    
+def confirmation_token
+	if self.confirm_token.blank?
+		self.confirm_token = SecureRandom.urlsafe_base64.to_s  
+  end
+end
+#이메일메임러ㅗㄴ랴ㅣㅗㅑㅍ농ㅊ얓먗ㅁ노메ㅐ놈내ㅗㅊㄴ초ㅑ내ㅗ챠내초냐ㅛㅊ내ㅑㅛ채뇨
     #위에는 이메일 하나에 대해서 여러가지 옵션을 줄수있음
     
     #validates_uniqueness_of :email, :stringid

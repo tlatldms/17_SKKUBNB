@@ -4,11 +4,11 @@
 
 <%= form_tag sessions_path do %>
     
-    ID나 Email을 입력하세요.<br>
+  
     
-    <%= text_field_tag :emailorid, nil, :placeholder=>"ID or Email", size:40 %><br>
-    <%= text_field_tag :password, nil, :placeholder=>"Password", size:40 %><br>
-    <%= submit_tag '로그인하기' %><br><br>
+    <%= text_field_tag :emailorid, nil, :placeholder=>"ID or Email", size:40 %><br><br>
+    <%= text_field_tag :password, nil, :placeholder=>"Password", size:40 %><br><br>
+    <%= submit_tag '로그인' %><br><br>
     <%=link_to '홈으로', contents_path %>
 <% end %>
 

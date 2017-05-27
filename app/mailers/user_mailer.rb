@@ -1,11 +1,9 @@
 class UserMailer < ActionMailer::Base
-=begin
-default :from => "me@mydomain.com"
+  default :from => "yunhaahn1125@gmail.com"
 
- def registration_confirmation(user)
-    @user = user
-    mail(:to => "#{user.name} <#{user.email}>", :subject => "Registration Confirmation")
- end
-=end
-end #end없다고 자꾸 오류ㅓ서이거하나만추가할겡..
- #이메일 인증
+    def registration_confirmation(user)
+	    @user = user
+	    mail(:to => "#{user.nickname} <#{user.email}>", :subject => "please confrim your registration")
+    end
+end
+ 

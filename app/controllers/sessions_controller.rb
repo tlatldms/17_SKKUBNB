@@ -30,25 +30,32 @@ class SessionsController < ApplicationController
       redirect_to :back
       
     end
-=begin
-def create
-      user = User.find_by_email(params[:email].downcase)
-      if user && user.authenticate(params[:password])
-      if user.email_confirmed
-          sign_in user
-        redirect_back_or user
-      else
-        flash.now[:error] = 'Please activate your account by following the 
-        instructions in the account confirmation email you received to proceed'
-        render 'new'
-      end
-      else
-        flash.now[:error] = 'Invalid email/password combination' # Not quite right!
-        render 'new'
-      end
-  end
-  #이메일ㅇㅈ
+    
+    
+# def create 
+#     @user = User.new(user_params) 
+#     if @user.save 
+#       UserMailer.registration_confirmation(@user).deliver
+#     flash[:success] = "등록성공.이메일 확인"
+#     redirect_to root_url
+#     else 
+#       render "new" 
+#     end 
+#   end 
+
+ def confirm_email
+	user = User.find_by_confirm_token(params[:id])
+	if user_params
+	    user.email_activate
+	    flash[:success] = 'welcome'
+	    redirect_to root_url
+    else
+    	flash[:error] = 'Error'
+	    redirect_to root_url
+    end
+ end
+ 
 
 
-=end
+
 end

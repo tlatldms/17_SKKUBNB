@@ -1,5 +1,8 @@
 Rails.application.routes.draw do
   
+  resources 'content3s' do
+    resources 'comment3s'
+  end
   get 'contents/rate2s/:id', to:'contents#rate2', :as=> :rate2
   get 'contents/home', :as=> :home
   resources 'content2s' do
@@ -19,6 +22,11 @@ Rails.application.routes.draw do
     resources 'rate2s'
   end
   
+   resources :users do
+    member do
+      get :confirm_email
+    end
+  end
   
   root 'contents#home'
 

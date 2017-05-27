@@ -31,7 +31,7 @@ class Content2sController < ApplicationController
 
   def update
     @content = Content2.find(params[:id])
-    @content.update(content_params)
+    @content.update(content2_params)
     
     redirect_to content2_path(@content)
   end
@@ -41,7 +41,7 @@ class Content2sController < ApplicationController
     # @content.delete #only content
     @content.destroy #content 자식들까지 삭제
     
-    redirect_to contents_url # 'http://~' 절대경로
+    redirect_to content2s_url # 'http://~' 절대경로
     # redirect_to contents_path #'/contents' 상대경로
   end
   

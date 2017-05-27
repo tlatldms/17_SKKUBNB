@@ -24,6 +24,8 @@ class Ability
         can :read, :all #(show, index)
         can :new, :all
         can :create, :all
+        can :rate2, :all
+        
         can :manage, :all, user_id: user.id
       end
       

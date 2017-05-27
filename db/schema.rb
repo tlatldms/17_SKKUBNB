@@ -11,11 +11,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170524192110) do
+ActiveRecord::Schema.define(version: 20170527133304) do
 
   create_table "comment2s", force: :cascade do |t|
     t.text     "body"
     t.integer  "content2_id"
+    t.integer  "user_id"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
+
+  create_table "comment3s", force: :cascade do |t|
+    t.text     "body"
+    t.integer  "content3_id"
     t.integer  "user_id"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
@@ -37,13 +45,21 @@ ActiveRecord::Schema.define(version: 20170524192110) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "content3s", force: :cascade do |t|
+    t.string   "title"
+    t.text     "body"
+    t.integer  "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "contents", force: :cascade do |t|
     t.string   "title"
     t.text     "body"
     t.integer  "user_id"
-    t.string   "image"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.string   "image_url",  default: ""
+    t.datetime "created_at",              null: false
+    t.datetime "updated_at",              null: false
   end
 
   create_table "rate2s", force: :cascade do |t|
@@ -51,8 +67,9 @@ ActiveRecord::Schema.define(version: 20170524192110) do
     t.string   "title"
     t.integer  "content_id"
     t.integer  "user_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.string   "rateinteger"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
   end
 
   create_table "roles", force: :cascade do |t|
@@ -79,8 +96,10 @@ ActiveRecord::Schema.define(version: 20170524192110) do
     t.string   "stringid"
     t.string   "realname"
     t.string   "name"
-    t.datetime "created_at",            null: false
-    t.datetime "updated_at",            null: false
+    t.datetime "created_at",                            null: false
+    t.datetime "updated_at",                            null: false
+    t.boolean  "email_confirmed",       default: false
+    t.string   "confirm_token"
   end
 
   create_table "users_roles", id: false, force: :cascade do |t|
