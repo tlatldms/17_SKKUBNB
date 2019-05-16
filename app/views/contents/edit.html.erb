@@ -10,8 +10,8 @@
    
        <input type='file' name='pic' accept='image/*'>
     <br><br>
-    <%= f.submit '등록하기' %>
+   <%= image_submit_tag("editbutton.png") %>
 <%end%>
 <br>
-<%=link_to '홈으로', contents_path%>
+<%=link_to image_tag("/assets/listbutton.png"), contents_path%>
 </div>

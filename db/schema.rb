@@ -48,7 +48,10 @@ ActiveRecord::Schema.define(version: 20170527133304) do
   create_table "content3s", force: :cascade do |t|
     t.string   "title"
     t.text     "body"
+    t.date     "date"
     t.integer  "user_id"
+    t.string   "campus"
+    t.string   "gender"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -57,9 +60,18 @@ ActiveRecord::Schema.define(version: 20170527133304) do
     t.string   "title"
     t.text     "body"
     t.integer  "user_id"
-    t.string   "image_url",  default: ""
-    t.datetime "created_at",              null: false
-    t.datetime "updated_at",              null: false
+    t.string   "stringid"
+    t.string   "realname"
+    t.string   "image_url",      default: ""
+    t.date     "date"
+    t.integer  "rate2_id"
+    t.string   "campus"
+    t.string   "gender"
+    t.string   "shower"
+    t.string   "airconditioner"
+    t.string   "laundry"
+    t.datetime "created_at",                  null: false
+    t.datetime "updated_at",                  null: false
   end
 
   create_table "rate2s", force: :cascade do |t|
@@ -67,7 +79,7 @@ ActiveRecord::Schema.define(version: 20170527133304) do
     t.string   "title"
     t.integer  "content_id"
     t.integer  "user_id"
-    t.string   "rateinteger"
+    t.integer  "rateinteger"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
   end

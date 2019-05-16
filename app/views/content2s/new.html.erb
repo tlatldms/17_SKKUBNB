@@ -1,12 +1,18 @@
 <div class=wholebox>
-    자유게시판
-<br><br><br><br><%= form_for @content do |f| %>
-    <%= f.hidden_field :user_id, value: current_user.id %>
-    <%= f.label :title, '제목' %>
-    <%= f.text_field :title %><br><br>
-    <%= f.label :body, '내용' %>
-    <%= f.text_area :body %><br>
-    <%= f.submit %>
-<%end%>
-<%=link_to '홈으로', content2s_path%>
+     <%= image_tag "freecon.png" %>
+<div class=post>
+     
+        <%= form_for @content do |f| %>
+            <%= f.hidden_field :user_id, value: current_user.id %>
+            <%= f.label :title, '제목' %><br><br>
+            <%= f.text_field :title , size:"50"%><br><br>
+            <%= f.label :body, '내용' %><br><br>
+            <%= f.text_area :body, size: "50x10" %><br><br>
+               <%= image_submit_tag("writebutton.png") %>
+        <%end%>
+
+</div>
+<br><br>
+<%=link_to image_tag("/assets/homebutton.png"), content2s_path%>
+
 </div>

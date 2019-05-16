@@ -1,26 +1,36 @@
 <div class=wholebox>
+<img src="/assets/free.png" width="200">
 
-<br><h2>
-    제목:<%= @content.title %>
-</h2>
-<p>
-    <%= simple_format(@content.body) %>
-</p>
+<div class=show>
+        <h3>
+          글 제목:  <%= @content.title %>
+        </h3><br>
+        <p>
+            <%= simple_format(@content.body) %>
+        </p>
+        
+        <hr>
+        <div class="replyInput">
+            <% if @current_user!=nil %>
+            <%= form_for [@content, Comment2.new] do |f|%>
+                <%= f.text_area :body,class:"replyInputCss",placeholder:"댓글작성" %>
+                <%= image_submit_tag("commentbutton.png") %>
+            <%end%>
+            <% end %>
+</div>
+<br>
+<div class="replyCss">
+    
+    <br>
+    <% @content.comment2s.each do |comment| %>
+        <%= comment.user.realname %>(<%= comment.user.stringid %>)님: <%= comment.body %><br><br>
+    <% end %>
+    
+</div>
+
+    
 
 <br>
 
-<댓글 목록><br>
-
-<% @content.comment2s.each do |comment| %>
-    <%= comment.user.realname %>(<%= comment.user.stringid %>)님: <%= comment.body %><br>
-<% end %>
-<% if @current_user!=nil %>
-<%= form_for [@content, Comment2.new] do |f|%>
-    <%= f.text_area :body %>
-    <%= f.submit '등록하기'%>
-<%end%>
-<% end %>
-
-
- <%= link_to '목록으로', content2s_path %>
+ <%= link_to image_tag("/assets/listbutton.png"), content2s_path %>
  </div>

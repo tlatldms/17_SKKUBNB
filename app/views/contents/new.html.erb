@@ -1,19 +1,51 @@
+<!--Content입니다 방 올리기-->
 <div class=wholebox><br>
-<%= form_for @content, html: { multipart: true } do |f| %>
-    <%= f.hidden_field :user_id, value: current_user.id %>
-    <%= f.label :title, '제목' %>
-    <%= f.text_field :title %><br><br>
-    <%= f.label :body, '내용' %>
-    <%= f.text_area :body %><br><br>
-    <%= f.label :body, '가능한 날짜' %>
-    <%= f.date_field :body, min: Time.now, max: Time.now+10.days %><br><br>    
-   
-       <input type='file' name='pic' accept='image/*'>
-    <br><br>
-    <%= f.submit '등록하기' %>
-<%end%>
-<br>
-<%=link_to '홈으로', contents_path%>
+     <%= image_tag "lendcon.png"%><br><br>
+     <div class=post>
+    <%= form_for @content, html: { multipart: true } do |f| %>
+        <%= f.hidden_field :user_id, value: current_user.id %>
+        <%= f.label :title, '제목' %>
+        <%= f.text_field :title , size:"20"%>&nbsp;&nbsp;
+        <%= f.label :date, '가능한 날짜' %>
+        <%= f.date_field :date, min: Time.now, max: Time.now+10.days %><br>
+        <기본><br>
+        <%= f.label :campus, '명륜' %>
+        <%= f.check_box :campus, {}, "명륜", nil %>&nbsp;
+        <%= f.label :campus, '율전' %>
+        <%= f.check_box :campus, {}, "율전", nil %>
+        <br>
+        <%= f.label :gender, '여자' %>
+        <%= f.check_box :gender, {}, "여", nil %>&nbsp;
+        <%= f.label :gender, '남자' %>
+        <%= f.check_box :gender, {}, "남", nil %>
+        <br>
+        <옵션><br>
+        샤워&nbsp;&nbsp;
+        <%= f.label :shower, '가능' %>
+        <%= f.check_box :shower, {}, "가능", nil %>&nbsp;
+        <%= f.label :shower, '불가능' %>
+        <%= f.check_box :shower, {}, "불가능", nil %><br>
+        에어컨&nbsp;&nbsp;
+         <%= f.label :airconditioner, '가능' %>
+        <%= f.check_box :airconditioner, {}, "가능", nil %>&nbsp;
+        <%= f.label :airconditioner, '불가능' %>
+        <%= f.check_box :airconditioner, {}, "불가능", nil %><br>
+        빨래&nbsp;&nbsp;
+         <%= f.label :laundry, '가능' %>
+        <%= f.check_box :laundry, {}, "가능", nil %>&nbsp;
+        <%= f.label :laundry, '불가능' %>
+        <%= f.check_box :laundry, {}, "불가능", nil %><br>
+        
+        
+        <%= f.label :body, '내용' %><br>
+        <%= f.text_area :body ,  placeholder:"가격, 주소 및 연락처(카톡 ID)를 적어주세요", size: "50x5" %><br>
+        <input type='file' name='pic' accept='image/*' class='uploadImg'>
+           <%= image_submit_tag("lendbutton.png") %>
+    <%end%>
+    </div>
+    
+    <br>
+    <hr>
+    <br>
+    <%=link_to image_tag("/assets/homebutton.png"), contents_path%>
 </div>
-
-

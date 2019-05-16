@@ -1,7 +1,5 @@
 class Rate2sController < ApplicationController
-  before_action :authorize, only: [:new, :edit, :update, :destroy]
-  load_and_authorize_resource
-  
+
   def create
     @content = Content.find(params[:content_id])
     @rate2s=Rate2.all
@@ -15,6 +13,7 @@ class Rate2sController < ApplicationController
   
   def new
     @rate2s=Rate2.all
+    @rate2 = @content.rate2s.new(rate2_params)
     @rate2 = Rate2.find(params[:id])
     
     redirect_to :back
@@ -40,7 +39,7 @@ class Rate2sController < ApplicationController
     @content = Content.find(params[:content_id])
     @rate2 = Rate2.find(params[:id])
     @rate2.destroy 
-    
+ 
     redirect_to :back 
     
   end

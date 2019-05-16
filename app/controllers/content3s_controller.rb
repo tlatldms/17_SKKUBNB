@@ -5,9 +5,18 @@ class Content3sController < ApplicationController
   
   def index
     @contents = Content3.all
+    @contentss = @contents.paginate(page: params[:page], per_page: 10)
+    @contents = Content3.search(params[:search])
+  end
+  
+  def searchindex
+    @contents = Content3.all
+    @content = Content3.new
+    @contents= Content3.search(params[:search]).reverse
   end
 
   def show
+     @contents = Content3.all
     @content = Content3.find(params[:id])
   end
 
@@ -31,7 +40,7 @@ class Content3sController < ApplicationController
 
   def update
     @content = Content3.find(params[:id])
-    @content.update(content_params)
+    @content.update(content3_params)
     
     redirect_to content3_path(@content)
   end
@@ -54,6 +63,6 @@ class Content3sController < ApplicationController
   
   
   def content3_params
-    params.require(:content3).permit(:title, :body, :user_id)
+    params.require(:content3).permit(:title, :body, :user_id, :date, :campus, :gender)
   end
 end

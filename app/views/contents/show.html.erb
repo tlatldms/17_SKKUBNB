@@ -1,135 +1,108 @@
-<!DOCTYPE html>
-
-
-
-<head>
-    <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
-    <meta charset="utf-8">
-    <style>
-      /* Always set the map height explicitly to define the size of the div
-       * element that contains the map. */
-      #map {
-        height: 60%;
-        width: 50%;
-        /*position: relative;*/
-        right 20px;
-        display:inline-block;
-        float:right;
-        margin-right:5rem;
-      }
-      /* Optional: Makes the sample page fill the window. */
-      html, body {
-        height: 100%;
-     
-        margin: 0;
-        padding: 0;
-      }
-      .controls {
-        background-color: #fff;
-        border-radius: 2px;
-        border: 1px solid transparent;
-        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
-        box-sizing: border-box;
-        font-family: Roboto;
-        font-size: 15px;
-        font-weight: 300;
-        height: 10%;
-        margin-left: 17px;
-        margin-top: 10px;
-        outline: none;
-        padding: 0 11px 0 13px;
-        text-overflow: ellipsis;
-        width: 50%;
-      }
-
-      .controls:focus {
-        border-color: #4d90fe;
-      }
-      .title {
-        font-weight: bold;
-      }
-      #infowindow-content {
-        display: none;
-      }
-      #map #infowindow-content {
-        display: inline;
-      }
-       .room_image {
-        height: 60%;
-        width: 50%;
- 
-        position: relative;
-        left 20px;
-        display:inline-block;
-        float:left;
-        margin-left:5rem;
-      }
-
-
-    </style>
-  </head>
-  <body>
+<!--Content입니다 방 올리기-->
     
-    <div class=wholebox>
-<br><h2>
-    제목:<%= @content.title %>
-</h2>
-<p>
-    <%= simple_format(@content.body) %>
+<div class=wholebox><br>
+        <div class=show>
+                <h3>
+                    글 제목: <%= @content.title %><br>
+                </h3><hr style=weight:bold, color:black>
+                <p> <%= @content.campus %>캠퍼스에 거주하는 <%= @content.gender %>학우입니다  </p>
+                <P> <%= @content.date.strftime("%Y년 %m월 %d일부터 손님 맞을 준비가 되었습니다!") %> </P>
+                <p> 샤워 <%= @content.shower %>하고, 에어컨은 사용 <%= @content.airconditioner %>하며, 세탁기 사용은 <%= @content.laundry %>합니다.</p>
+                   <%= @content.body %>
+                   <br><br>
+                <div id= "room_image">
+                <%= image_tag (@content.image_url), :class => "r_image"  %>
+                </div>
+                
+    
+        </div>
 
-</p>
+<br>
+    <% if @content.rate2s.blank? %>
+    <br>
+    < 아직 등록된 후기가 없습니다. >
+    <% else %>
+    평점: <%= @content.rate2s.average(:rateinteger).round(2) %>
+    
+    <br>
+    
+    <% if @content.rate2s.average(:rateinteger).round==1 %>
+    <img class="stars" src="/assets/1.png">
+    <% end %>
+    <% if @content.rate2s.average(:rateinteger).round==2 %>
+    <img class="stars" src="/assets/2.png">
+    <% end %>
+    <% if @content.rate2s.average(:rateinteger).round==3 %>
+    <img class="stars" src="/assets/3.png">
+    <% end %>
+    <% if @content.rate2s.average(:rateinteger).round==4 %>
+    <img class="stars" src="/assets/4.png">
+    <% end %>
+    <% if @content.rate2s.average(:rateinteger).round==5 %>
+    <img class="stars" src="/assets/5.png">
+    <% end %>
+    <% if @content.rate2s.average(:rateinteger).round==6 %>
+    <img class="stars" src="/assets/6.png">
+    <% end %>
+    <% if @content.rate2s.average(:rateinteger).round==7 %>
+    <img class="stars" src="/assets/7.png">
+    <% end %>
+    <%end%>
+    
+<br><br>
+<% if @current_user!=nil %>
+<%= form_for [@content, Comment.new] do |f|%>
+    <%= f.text_area :body%>
+    <%= image_submit_tag ("commentbutton.png")%>
+<%end%>
+<% end %><br>
 
-<div id= "room_image">
-<%= image_tag (@content.image_url), :class => "r_image"  %>
-</div>
-<!--<img src="</%= @content.image.url %>">-->
-<!--이미지 불러오기 (여진)-->
+
+댓글 문의
+    <table width = 90% class="table">
+        <thead>
+            <tr>
+                 <th width="15%", style="text-align:center">글쓴이</th>
+                 <th width="55%", style="text-align:center">내용</th>
+            </tr>
+        </thead>
+        <tbody>
+                <% @content.comments.each do |comment| %>
+                <% if @current_user == comment.user or @current_user == @content.user %>
+                <tr>
+                    <td width="15%"><%= comment.user.realname %>(<%= comment.user.stringid %>)님</td>
+                    <td width="55%"><%= comment.body %></td>
+                    
+                        <!--</% if can? :update, comment %>-->
+                        <!--</%= link_to '글 수정하기', edit_content_comment_path(@content, @comment) %>-->
+                        <!--</%end%>-->
+                        
+                    <% if can? :destroy, comment %>
+                    <td width="15%"><%= link_to image_tag("/assets/deletebutton.png"), [comment.content, comment], method: :delete, 
+                                data:{confirm:'정말 삭제하시겠습니까?'} %>
+                    <% end %></td>
+                
+        
+                    <% else %>
+                    <td width="15%"></td>
+                    <td width="55%">비밀 댓글입니다.
+                     <% end %></td>
+                </tr>
+         </tbody>
+        <% end %>
+        </table>
+
 
 
 <br>
----------------댓글 문의----------------<br>
 
-<% @content.comments.each do |comment| %>
-    <% if @current_user == comment.user or @current_user == @content.user %>
-    <%= comment.user.realname %>(<%= comment.user.stringid %>)님:
-    <%= comment.body %>
-    
-        <!--</% if can? :update, comment %>-->
-        <!--</%= link_to '글 수정하기', edit_content_comment_path(@content, @comment) %>-->
-        <!--</%end%>-->
-        
-            <% if can? :destroy, comment %>
-            <%= link_to '삭제하기', [comment.content, comment], method: :delete, 
-                data:{confirm:'정말 삭제하시겠습니까?'} %>
-            <% end %>
-   
-    <br>
-    <% else %>
-    비밀 댓글입니다. <br>
-     <% end %>
-<% end %>
+ <%= link_to image_tag("/assets/reviewbutton.png"), rate2_path %><br><br>
+ <%= link_to image_tag("/assets/listbutton.png"), contents_path %>
+ <br><h2>
 
-<% if @current_user!=nil %>
-<%= form_for [@content, Comment.new] do |f|%>
-    <%= f.text_area :body %>
-    <%= f.submit '문의 등록'%>
-<%end%>
-<% end %>
-
-
-<br><br>
-
-
- <%= link_to '후기 보기', rate2_path %>
- <%= link_to '목록으로', contents_path %>
- 
-<!-- <iframe src="https://project1-tlatldms.c9users.io/contents/rate2s/1" height="500" width="400">-->
-<!--  <p>Your browser does not support iframes.</p>-->
-<!--</iframe>--><br><h2>
-  
     
     </div>
-    
+<div class=wholebox>
     <input id="pac-input" class="controls" type="text"
         placeholder="Enter a location">
     <div id="map"></div>
@@ -204,3 +177,4 @@
         async defer></script>
   </body>
 
+</div>

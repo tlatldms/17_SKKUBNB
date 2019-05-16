@@ -1,5 +1,3 @@
-# encoding: utf-8
-
 class MachineUploader < CarrierWave::Uploader::Base
 
   # Include RMagick or MiniMagick support:

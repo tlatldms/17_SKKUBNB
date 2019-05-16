@@ -5,6 +5,15 @@ class Content2sController < ApplicationController
   
   def index
     @contents = Content2.all
+    @contentss = @contents.paginate(page: params[:page], per_page: 10)
+    
+    @contents = Content2.search(params[:search])
+  end
+  
+  def searchindex
+    @contents = Content2.all
+    @content = Content2.new
+    @contents= Content2.search(params[:search]).reverse
   end
 
   def show

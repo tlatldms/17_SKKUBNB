@@ -1,65 +1,6 @@
-<!DOCTYPE html>
 
-
-
-<head>
-    <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
-    <meta charset="utf-8">
-    <style>
-      /* Always set the map height explicitly to define the size of the div
-       * element that contains the map. */
-      #map {
-        height: 50%;
-        width: 50%;
-        /*position: relative;*/
-        right 20px;
-        display:inline-block;
-        float:right;
-        margin-right:5rem;
-      }
-      /* Optional: Makes the sample page fill the window. */
-      html, body {
-        height: 100%;
-     
-        margin: 0;
-        padding: 0;
-      }
-      .controls {
-        background-color: #fff;
-        border-radius: 2px;
-        border: 1px solid transparent;
-        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
-        box-sizing: border-box;
-        font-family: Roboto;
-        font-size: 15px;
-        font-weight: 300;
-        height: 10%;
-        margin-left: 17px;
-        margin-top: 10px;
-        outline: none;
-        padding: 0 11px 0 13px;
-        text-overflow: ellipsis;
-        width: 50%;
-      }
-
-      .controls:focus {
-        border-color: #4d90fe;
-      }
-      .title {
-        font-weight: bold;
-      }
-      #infowindow-content {
-        display: none;
-      }
-      #map #infowindow-content {
-        display: inline;
-      }
-
-    </style>
-  </head>
-  <body>
     
-   <div class=wholebox>후기 작성
+<div class=wholebox>후기 작성
 <br><h2>
     제목:<%= @content.title %>
 </h2>
@@ -70,104 +11,82 @@
 
 
 <br>
+<% if @content.rate2s.blank? %>
+아직 등록된 후기가 없습니다.
+<% else %>
+평점: <%= @content.rate2s.average(:rateinteger).round(2) %><br>
+    <% if @content.rate2s.average(:rateinteger).round==1 %>
+    <img class="stars" src="/assets/1.png">
+    <% end %>
+    <% if @content.rate2s.average(:rateinteger).round==2 %>
+    <img class="stars" src="/assets/2.png">
+    <% end %>
+    <% if @content.rate2s.average(:rateinteger).round==3 %>
+    <img class="stars" src="/assets/3.png">
+    <% end %>
+    <% if @content.rate2s.average(:rateinteger).round==4 %>
+    <img class="stars" src="/assets/4.png">
+    <% end %>
+    <% if @content.rate2s.average(:rateinteger).round==5 %>
+    <img class="stars" src="/assets/5.png">
+    <% end %>
+    <% if @content.rate2s.average(:rateinteger).round==6 %>
+    <img class="stars" src="/assets/6.png">
+    <% end %>
+    <% if @content.rate2s.average(:rateinteger).round==7 %>
+    <img class="stars" src="/assets/7.png">
+    <% end %>
+
+<%end%><br><br>
+
 ---------------후기----------------<br>
 
 <% @content.rate2s.each do |rate| %>
-    <%= rate.user.realname %>(<%= rate.user.stringid %>)님:<br>
-    <!--점수:<!%= rate.rateinteger %><br>-->
-    <%= rate.title %><br>
-    <%= rate.body %>
+    
+    
+    제목: <%= rate.title %><br>
+    평가:
+    <% if rate.rateinteger==1 %>
+    <img class="stars" src="/assets/1.png">
+    <% end %>
+    <% if rate.rateinteger==2 %>
+    <img class="stars" src="/assets/2.png">
+    <% end %>
+    <% if rate.rateinteger==3 %>
+    <img class="stars" src="/assets/3.png">
+    <% end %>
+    <% if rate.rateinteger==4 %>
+    <img class="stars" src="/assets/4.png">
+    <% end %>
+    <% if rate.rateinteger==5 %>
+    <img class="stars" src="/assets/5.png">
+    <% end %>
+    <% if rate.rateinteger==6 %>
+    <img class="stars" src="/assets/6.png">
+    <% end %>
+    <% if rate.rateinteger==7 %>
+    <img class="stars" src="/assets/7.png">
+    <% end %>
+    <br>
+    <%= rate.body %><br>
+    글쓴이: <%= rate.user.realname %>(<%= rate.user.stringid %>)님<br>
     
     <% if can? :destroy, rate %>
-    <%= link_to '삭제하기', [rate.content, rate], method: :delete, 
+    <%= link_to image_tag("/assets/deletebutton.png"), [rate.content, rate], method: :delete, 
         data:{confirm:'정말 삭제하시겠습니까?'} %>
     <%end%>
     <br><br>
 <% end %>
 <% if @current_user!=nil %>
-<%= form_for [@content, Rate2.new] do |f|%>
+<%= form_for Rate2.new, url: content_rate2s_path(content_id: @content.id) do |f|%>
 
-    <!--점수: </%= f.select :rate2_id, options_from_collection_for_select(@rate2s, "id", "rateinteger") %> <br>-->
+    점수: <%= f.select :rateinteger, options_for_select({ "1점" => 1, "2점" => 2,"3점" => 3, "4점" => 4, "5점" => 5, "6점" => 6,"7점" => 7}) %> <br>
     <%= f.text_field :title %><br>
-    <%= f.text_area :body %>
-    <%= f.submit '후기 등록'%>
+    <%= f.text_area :body %><br>
+    <%= image_submit_tag("reviewbutton1.png")%>
 <%end%>
 <%end%>
 <br>
-<%=link_to '홈으로', contents_path%>
+<%=link_to image_tag("/assets/homebutton.png"), contents_path%>
 </div>
     
-    <input id="pac-input" class="controls" type="text"
-        placeholder="Enter a location">
-    <div id="map"></div>
-    <div id="infowindow-content">
-      <span id="place-name"  class="title"></span><br>
-      Place ID <span id="place-id"></span><br>
-      <span id="place-address"></span>
-    </div>
-
-    <script>
-      // This sample uses the Place Autocomplete widget to allow the user to search
-      // for and select a place. The sample then displays an info window containing
-      // the place ID and other information about the place that the user has
-      // selected.
-
-      // This example requires the Places library. Include the libraries=places
-      // parameter when you first load the API. For example:
-      // <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&libraries=places">
-
-      function initMap() {
-        var map = new google.maps.Map(document.getElementById('map'), {
-          center: {lat: -33.8688, lng: 151.2195},
-          zoom: 13
-        });
-
-        var input = document.getElementById('pac-input');
-
-        var autocomplete = new google.maps.places.Autocomplete(input);
-        autocomplete.bindTo('bounds', map);
-
-        map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
-
-        var infowindow = new google.maps.InfoWindow();
-        var marker = new google.maps.Marker({
-          map: map
-        });
-        marker.addListener('click', function() {
-          infowindow.open(map, marker);
-        });
-
-        autocomplete.addListener('place_changed', function() {
-          infowindow.close();
-          var place = autocomplete.getPlace();
-          if (!place.geometry) {
-            return;
-          }
-
-          if (place.geometry.viewport) {
-            map.fitBounds(place.geometry.viewport);
-          } else {
-            map.setCenter(place.geometry.location);
-            map.setZoom(17);
-          }
-
-          // Set the position of the marker using the place ID and location.
-          marker.setPlace({
-            placeId: place.place_id,
-            location: place.geometry.location
-          });
-          marker.setVisible(true);
-
-          document.getElementById('place-name').textContent = place.name;
-          document.getElementById('place-id').textContent = place.place_id;
-          document.getElementById('place-address').textContent =
-              place.formatted_address;
-          infowindow.setContent(document.getElementById('infowindow-content'));
-          infowindow.open(map, marker);
-        });
-      }
-    </script>
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBvFt6owbM6BT37xfqeLicIqsMvSjyyOkQ&libraries=places&callback=initMap"
-        async defer></script>
-  </body>
-

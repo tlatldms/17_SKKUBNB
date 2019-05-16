@@ -6,7 +6,7 @@ class CreateRate2s < ActiveRecord::Migration
       
       t.integer :content_id
       t.integer :user_id
-      t.string :rateinteger
+      t.integer :rateinteger
 
       t.timestamps null: false
     end

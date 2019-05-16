@@ -1,5 +1,9 @@
 Rails.application.routes.draw do
   
+   get 'contents/searchindex', :as=> :contents_searchindex
+   get 'content2s/searchindex', :as=> :content2s_searchindex
+   get 'content3s/searchindex', :as=> :content3s_searchindex
+  
   resources 'content3s' do
     resources 'comment3s'
   end
@@ -18,7 +22,7 @@ Rails.application.routes.draw do
     resources 'comments'
   end
   
-    resources 'contents' do
+  resources 'contents' do
     resources 'rate2s'
   end
   

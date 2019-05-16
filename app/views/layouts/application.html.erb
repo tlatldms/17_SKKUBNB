@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+  <%= favicon_link_tag 'favicon.ico' %>
   <title>SKKUBNB </title>
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
@@ -21,19 +22,20 @@
 <!-- 합쳐지고 최소화된 최신 자바스크립트 -->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
   
-  
 </head>
 <body>
-  <div class = "wrap" style="width:80%; margin:auto;">
-    <h1 id="mainname">SKKUBNB</h1>
+  <div class = "wrap" style="width:80%; margin:auto; height:60px;">
+    <a href="https://project1-tlatldms.c9users.io/contents/home"><img src="/assets/titlebar.png" width=100%></a>
+
+    <!--<h1 id="mainname">SKKUBNB</h1>-->
    <% if current_user %>
     <ul>
       <li><%= link_to '홈', home_path %> </li>
       <li><%=current_user.realname%>(<%=current_user.email %>) 님 환영합니다! </li>
-      <li style="float:right"><%= link_to '로그아웃하기', session_path(current_user.id), method: :delete %></li>
-      <li style="float:right"><%= link_to '자유게시판22', content2s_path %></li>
-      <li style="float:right"><%= link_to '방 있어요11', contents_path %> </li>
-      <li style="float:right"><%= link_to '방 구해요33', content3s_path %> </li>
+      <li style="float:right"><%= link_to '로그아웃', session_path(current_user.id), method: :delete %></li>
+      <li style="float:right"><%= link_to '자유게시판',content2s_path  %></li>
+      <li style="float:right"><%= link_to '방있어요',contents_path %> </li>
+      <li style="float:right"><%= link_to '방구해요', content3s_path %> </li>
       <li><%= link_to '어드민권한', edit_user_path(current_user.id) %></li>
     </ul>
     <!--<#%= link_to '모더권한', update_user_path(current_user.id) %>-->
@@ -42,17 +44,21 @@
     <!--#로그아웃, 로그인이 안됐을때 -->
     <ul>
       <li><%= link_to '홈', home_path %> </li>
-      <li style="float:right; :hover background-color:white;"><%= link_to '자유게시판22', content2s_path %></li>
-      <li style="float:right"><%= link_to '방 있어요11', contents_path %> </li>
-      <li style="float:right"><%= link_to '방 구해요33', content3s_path %> </li>
-      <li style="float:right"><%= link_to '회원가입하기', new_user_path %></li>
-      <li style="float:right">    <%= link_to '로그인하기', new_session_path %></li>
+      <li style="float:right; :hover background-color:white;"><%= link_to '자유게시판', content2s_path %></li>
+      <li style="float:right"><%= link_to '방있어요', contents_path %> </li>
+      <li style="float:right"><%= link_to '방구해요', content3s_path %> </li>
+      <li style="float:right"><%= link_to '회원가입', new_user_path %></li>
+      <li style="float:right">    <%= link_to '로그인', new_session_path %></li>
     </ul>
     <br>
     <% end %>
   <%= yield %>
   </div>
+  
 </body>
+
+
+
 </html>
 
 
@@ -60,13 +66,17 @@
       /* Always set the map height explicitly to define the size of the div
        * element that contains the map. */
       #map {
-        height: 50%;
-        width: 50%;
-        /*position: relative;*/
-        right 20px;
+        height: 400px;
+        width: 600px;
+        position: relative;
+        margin: auto;
+        text-align:center;
+        
         display:inline-block;
-        float:right;
-        margin-right:5rem;
+        
+     
+        
+        
       }
       /* Optional: Makes the sample page fill the window. */
       html, body {
@@ -90,7 +100,7 @@
         outline: none;
         padding: 0 11px 0 13px;
         text-overflow: ellipsis;
-        width: 50%;
+        width: 65%;
       }
 
       .controls:focus {

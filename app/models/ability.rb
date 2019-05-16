@@ -16,6 +16,7 @@ class Ability
         can :new, :all
         can :create, :all
         can :destroy, :all
+        can :rate2, :all
         can :manage, :all, user_id: user.id #(all 자리에 Content)
        
       
@@ -25,7 +26,6 @@ class Ability
         can :new, :all
         can :create, :all
         can :rate2, :all
-        
         can :manage, :all, user_id: user.id
       end
       

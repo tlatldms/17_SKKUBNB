@@ -1,0 +1,49 @@
+<div class="wholebox">
+
+
+    
+    <img src="/assets/freecon.png" >
+    <br>
+    
+검색 결과입니다.
+<%= link_to '목록으로 돌아가기', content2s_path %>
+<br>
+
+<div class="search">
+<%= form_tag contents_searchindex_path, :method => 'get' do %>
+      <%= text_field_tag :search, params[:search], placeholder:"제목/내용/작성자" %>
+      <%= submit_tag "Search", :name => nil %>
+<% end %>
+</div><br><br>
+    
+<br>
+    <table width = 90% class="table">
+      <thead>
+            <tr>
+             <th width="5%", style="text-align:center">번호</th>
+             <th width="55%">제목</th>
+             <th width="15%">글쓴이</th>
+            </tr>
+      </thead>
+      <tbody>
+              <% @contents.each do |content| %>
+              <tr>
+                    <td width-" 5%"> <%= content.id %></td>
+                    <td width="55%"><a href='<%= content2_path(content)%>'><%= content.title %></a></td>
+                    <td width="15%"><%= content.user.realname %>(<%= content.user.stringid %>)</td>
+                    <!-- #부모는 단수로 불러오고 자식은 복수로불러옴-->
+                    
+                    <% if can? :update, content %>
+                    <td width="15%"><%= link_to image_tag("/assets/editbutton.png"), edit_content2_path(content) %>
+                    <%end%></td>
+            
+                    <% if can? :destroy, content %>
+                   <td width="15%"> <%= link_to image_tag("/assets/deletebutton.png"), content2_path(content), method: :delete, 
+                        data:{confirm:'정말 삭제하시겠습니까?'} %>
+                    <%end%></td>
+              </tr>
+              <%end%>
+      </tbody>
+    </table> 
+     <%= link_to image_tag("/assets/newtext.png"), new_content2_path %>
+    </div>

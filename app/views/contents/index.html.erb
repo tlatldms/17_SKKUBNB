@@ -1,28 +1,53 @@
-<div class=wholebox>
-    <%= link_to '새 글 쓰기', new_content_path %><br><br>
+<!--Content입니다 방 올리기-->
 
-    
-    <% @contents.each do |content| %>
-        제목:<a href='<%= content_path(content)%>'><%= content.title %></a><br>
-        <%= image_tag (content.image_url), :class => "mini_rimage"  %> <br>
+
+
+<div class=wholebox>
+<img src="/assets/lendcon.png"  >
+<div class="search">
+<%= form_tag contents_searchindex_path, :method => 'get' do %>
+      <%= text_field_tag :search, params[:search], placeholder:"제목/내용으로 검색" %>
+      <%= submit_tag "Search", :name => nil %>
+<% end %>
+</div>
+<br>
+
+    <div class="row">
+     
+    <% @contentss.each do |content| %>
+    <a href='<%= content_path(content)%>'>
+      <div class="col-xs-3 col-md-3">
         
+        <%= image_tag (content.image_url),  :class => "mini_rimage"  %> <br>
+        제목:<%= content.title %><br>
         글쓴이:<%= content.user.realname %>(<%= content.user.stringid %>)<br>
         <!-- #부모는 단수로 불러오고 자식은 복수로불러옴-->
         
         <% if can? :update, content %>
-        <%= link_to '글 수정하기', edit_content_path(content) %>
+          <%= link_to image_tag("/assets/editbutton.png"), edit_content_path(content) %>
         <%end%>
         
         <% if can? :destroy, content %>
-        <%= link_to '삭제하기', content_path(content), method: :delete, 
+          <%= link_to image_tag("/assets/deletebutton.png"), content_path(content), method: :delete, 
             data:{confirm:'정말 삭제하시겠습니까?'} %>
         <%end%>
-    
+        
         
         <br><br>
-        
+
+        </div>
+        </a>
     <%end%>
-    
-</div>
+
+    <br>
+
+    </div>
+<br>
+        <%= link_to image_tag("/assets/newtext.png"), new_content_path %>
+<center>
+  <div class=pagination>
+  <%= will_paginate @contentss%>
+  </div>
+</center>
 
    

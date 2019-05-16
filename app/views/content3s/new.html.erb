@@ -1,11 +1,29 @@
+<!--Content3 입니다 방구하기-->
 <div class=wholebox>
-<%= form_for @content do |f| %>
-    <%= f.hidden_field :user_id, value: current_user.id %>
-    <%= f.label :title, '제목' %>
-    <%= f.text_field :title %><br><br>
-    <%= f.label :body, '내용' %>
-    <%= f.text_area :body %><br>
-    <%= f.submit '등록하기'%>
-<%end%>
-<%=link_to '목록으로', content3s_path%>
+<%= link_to image_tag("/assets/borrowcon.png") %>
+
+<div class=post>
+        <%= form_for @content do |f| %>
+            <%= f.hidden_field :user_id, value: current_user.id %>
+            <%= f.label :title, '제목' %>&nbsp;
+            <%= f.text_field :title , size: "10" %>&nbsp;&nbsp;&nbsp;
+            <%= f.label :date, '희망 날짜' %>&nbsp;
+            <%= f.date_field :date, min: Time.now, max: Time.now+10.days %><br>
+            <기본><br>
+            <%= f.label :campus, '명륜' %>
+            <%= f.check_box :campus, {}, "명륜", nil %>&nbsp;
+            <%= f.label :campus, '율전' %>
+            <%= f.check_box :campus, {}, "율전", nil %><br>
+            <%= f.label :gender, '여자' %>
+            <%= f.check_box :gender, {}, "여", nil %>&nbsp;
+            <%= f.label :gender, '남자' %>
+            <%= f.check_box :gender, {}, "남", nil %><br>
+            <%= f.label :body, '내용' %><br>
+            <%= f.text_area :body , size: "50x5" %><br>
+         
+              <%= image_submit_tag("borrowbutton.png") %>
+        <%end%>
+</div>
+<br><br>
+<%=link_to image_tag("/assets/listbutton.png"), content3s_path%>
 </div>
